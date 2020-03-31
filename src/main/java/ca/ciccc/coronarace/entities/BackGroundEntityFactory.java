@@ -1,12 +1,16 @@
 package ca.ciccc.coronarace.entities;
 
 import ca.ciccc.coronarace.Config;
+import ca.ciccc.coronarace.component.StreetlineComponent;
 import com.almasb.fxgl.entity.*;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class BackGroundEntityFactory implements EntityFactory {
+
+    public static final double WIDTH_PERCENT = 0.025;
+    public static final double HEIGHT_PERCENT = 0.2;
 
     @Spawns("street")
     public Entity newStreet(SpawnData data) {
@@ -38,22 +42,23 @@ public class BackGroundEntityFactory implements EntityFactory {
 
     @Spawns("streetline")
     public Entity newStreetlines(SpawnData data) {
-        double widthPercent = 0.025;
-        double xCenter = Config.WIDTH * (1 - widthPercent) / 2;
-        double height = Config.HEIGHT * 0.2;
-        double width = Config.WIDTH * widthPercent;
+        double xCenter = Config.WIDTH * (1 - WIDTH_PERCENT) / 2;
+        double height = Config.HEIGHT * HEIGHT_PERCENT;
+        double distance = height * Config.STREETLINE_DISTANCE_PERCENT;
+        double width = Config.WIDTH * WIDTH_PERCENT;
         Rectangle streetline = null;
         Group streetlines = new Group();
         int dy = 0;
-        while (dy < Config.HEIGHT) {
+        while (dy < Config.HEIGHT + distance) {
             streetline = new Rectangle(width, height, Color.LIGHTGRAY);
-            streetline.setX(xCenter);
-            streetline.setY(dy);
+            streetline.setTranslateX(xCenter);
+            streetline.setTranslateY(dy);
             streetlines.getChildren().add(streetline);
-            dy += height * 1.75;
+            dy += height + distance;
         }
         return Entities.builder()
                 .viewFromNode(streetlines)
+                .with(new StreetlineComponent())
                 .renderLayer(RenderLayer.BACKGROUND)
                 .build();
     }

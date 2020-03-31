@@ -4,8 +4,6 @@ import ca.ciccc.coronarace.entities.BackGroundEntityFactory;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.entity.Entities;
 import com.almasb.fxgl.entity.Entity;
-import com.almasb.fxgl.entity.RenderLayer;
-import com.almasb.fxgl.entity.view.EntityView;
 import com.almasb.fxgl.input.Input;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.settings.GameSettings;
@@ -35,6 +33,7 @@ public class CoronaRaceApp extends GameApplication {
     @Override
     protected void initGameVars(Map<String, Object> vars) {
         vars.put("DxDy", "X:0000.00 Y:0000.00");
+        vars.put("streetSpeed", Config.STREET_SPEED);
     }
 
     @Override
@@ -54,6 +53,11 @@ public class CoronaRaceApp extends GameApplication {
         textPixels.setTranslateY(100); // y = 100
         textPixels.textProperty().bind(getGameState().stringProperty("DxDy"));
         getGameScene().addUINode(textPixels); // add to the scene graph
+        Text textSpeed = new Text();
+        textSpeed.setTranslateX(50); // x = 50
+        textSpeed.setTranslateY(120); // y = 100
+        textSpeed.textProperty().bind(getGameState().doubleProperty("streetSpeed").asString());
+        getGameScene().addUINode(textSpeed); // add to the scene graph
 
         getGameWorld().spawn("street");
         getGameWorld().spawn("sidewalk");

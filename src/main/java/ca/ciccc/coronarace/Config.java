@@ -37,5 +37,7 @@ public final class Config {
     public static final String VERSION = "0.1";
     public static final int WIDTH = 600;
     public static final int HEIGHT = 600;
+    public static final double STREETLINE_DISTANCE_PERCENT = 0.75;
+    public static final double STREET_SPEED = 10.0;
 
 }
