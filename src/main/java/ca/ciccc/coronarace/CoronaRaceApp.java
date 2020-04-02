@@ -1,10 +1,13 @@
 package ca.ciccc.coronarace;
 
 import ca.ciccc.coronarace.entities.BackGroundEntityFactory;
+import ca.ciccc.coronarace.entities.EntityType;
+import ca.ciccc.coronarace.entities.PlayerEntityFactory;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.entity.Entities;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.input.Input;
+import com.almasb.fxgl.input.InputMapping;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.settings.GameSettings;
 import javafx.scene.input.KeyCode;
@@ -12,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
+import java.util.List;
 import java.util.Map;
 
 public class CoronaRaceApp extends GameApplication {
@@ -39,11 +43,7 @@ public class CoronaRaceApp extends GameApplication {
     @Override
     protected void initGame() {
         getGameWorld().addEntityFactory(new BackGroundEntityFactory());
-
-        player = Entities.builder()
-                .at(300, 300)
-                .viewFromNode(new Rectangle(25, 25, Color.BLUE))
-                .buildAndAttach(getGameWorld());
+        getGameWorld().addEntityFactory(new PlayerEntityFactory());
     }
 
     @Override
@@ -62,52 +62,24 @@ public class CoronaRaceApp extends GameApplication {
         getGameWorld().spawn("street");
         getGameWorld().spawn("sidewalk");
         getGameWorld().spawn("streetline");
+        getGameWorld().spawn("player");
+
+        Input input = getInput();
+        List<Entity> entities = getGameWorld().getEntitiesByType(EntityType.PLAYER);
+        getGameWorld().getEntitiesByType(EntityType.PLAYER).forEach(entity -> entity.getComponents().forEach(component -> input.scanForUserActions(component)));
     }
 
 
     @Override
     protected void initInput() {
         Input input = getInput();
+        List<Entity> entities = getGameWorld().getEntitiesByType(EntityType.PLAYER);
+        getGameWorld().getEntitiesByType(EntityType.PLAYER).forEach(entity -> entity.getComponents().forEach(component -> input.scanForUserActions(component)));
 
-        input.addAction(new UserAction("Move Right") {
-            @Override
-            protected void onAction() {
-                getGameState().setValue("DxDy", String.format("X:%4.2f Y:%4.2f", player.getX(), player.getY()));
-                if (player.getX() < getWidth() - 20) {
-                    player.translateX(5); // move right 5 pixels
-                }
-            }
-        }, KeyCode.RIGHT);
-
-        input.addAction(new UserAction("Move Left") {
-            @Override
-            protected void onAction() {
-                getGameState().setValue("DxDy", String.format("X:%4.2f Y:%4.2f", player.getX(), player.getY()));
-                if (player.getX() > 0) {
-                    player.translateX(-5); // move left 5 pixels
-                }
-            }
-        }, KeyCode.LEFT);
-
-        input.addAction(new UserAction("Move Up") {
-            @Override
-            protected void onAction() {
-                getGameState().setValue("DxDy", String.format("X:%4.2f Y:%4.2f", player.getX(), player.getY()));
-                if (player.getY() > 0) {
-                    player.translateY(-5); // move up 5 pixels
-                }
-            }
-        }, KeyCode.UP);
-
-        input.addAction(new UserAction("Move Down") {
-            @Override
-            protected void onAction() {
-                getGameState().setValue("DxDy", String.format("X:%4.2f Y:%4.2f", player.getX(), player.getY()));
-                if (player.getY() < getHeight() - 20) {
-                    player.translateY(5); // move down 5 pixels
-                }
-            }
-        }, KeyCode.DOWN);
+        input.addInputMapping(new InputMapping("up",KeyCode.UP));
+        input.addInputMapping(new InputMapping("down",KeyCode.DOWN));
+        input.addInputMapping(new InputMapping("left",KeyCode.LEFT));
+        input.addInputMapping(new InputMapping("right",KeyCode.RIGHT));
     }
 
 
