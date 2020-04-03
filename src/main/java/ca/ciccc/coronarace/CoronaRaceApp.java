@@ -29,7 +29,7 @@ public class CoronaRaceApp extends GameApplication {
     @Override
     protected void initSettings(GameSettings settings) {
         settings.setWidth(Config.WIDTH);
-        settings.setHeight(Config.HEIGHT - 5);
+        settings.setHeight(Config.HEIGHT);
         settings.setTitle(Config.TITLE_CORONA_RACE);
         settings.setVersion(Config.VERSION);
     }

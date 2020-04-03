@@ -33,7 +33,7 @@ public class PlayerComponent extends Component {
 
     @OnUserAction(name = "down", type = ActionType.ON_ACTION)
     public void moveDown() {
-        if (entity.getY() < getHeight() - 20) {
+        if (entity.getY() < getHeight() - entity.getBoundingBoxComponent().getHeight()) {
             entity.translateY(5); // move down 5 pixels
             getGameState().setValue("DxDy", String.format("X:%4.2f Y:%4.2f", entity.getX(), entity.getY()));
         }
@@ -49,7 +49,7 @@ public class PlayerComponent extends Component {
 
     @OnUserAction(name = "right", type = ActionType.ON_ACTION)
     public void moveRight() {
-        if (entity.getX() < getWidth() - 20) {
+        if (entity.getX() < getWidth() - entity.getBoundingBoxComponent().getWidth()) {
             entity.translateX(5); // move right 5 pixels
             getGameState().setValue("DxDy", String.format("X:%4.2f Y:%4.2f", entity.getX(), entity.getY()));
         }
