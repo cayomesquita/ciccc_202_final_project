@@ -24,8 +24,8 @@ public class CoronaRaceApp extends GameApplication {
     @Override
     protected void initSettings(GameSettings settings) {
         settings.setWidth(600);
-        settings.setHeight(600);
-        settings.setTitle("Basic Game App");
+        settings.setHeight(900);
+        settings.setTitle("CoronaRace");
         settings.setVersion("0.1");
     }
 
@@ -50,8 +50,6 @@ public class CoronaRaceApp extends GameApplication {
         textPixels.textProperty().bind(getGameState().intProperty("pixelsMoved").asString());
         getGameScene().addUINode(textPixels); // add to the scene graph
     }
-
-
 
     @Override
     protected void initInput() {
@@ -89,7 +87,4 @@ public class CoronaRaceApp extends GameApplication {
             }
         }, KeyCode.S);
     }
-
-
-
 }
