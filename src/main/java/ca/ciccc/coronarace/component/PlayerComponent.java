@@ -1,12 +1,9 @@
 package ca.ciccc.coronarace.component;
 
-import com.almasb.fxgl.app.FXGL;
-import com.almasb.fxgl.entity.component.Component;
-import com.almasb.fxgl.gameplay.GameState;
 import com.almasb.fxgl.input.ActionType;
 import com.almasb.fxgl.input.OnUserAction;
 
-public class PlayerComponent extends Component {
+public class PlayerComponent extends CoronaRaceComponentAbstract {
 
     @Override
     public void onAdded() {
@@ -55,15 +52,4 @@ public class PlayerComponent extends Component {
         }
     }
 
-    private GameState getGameState() {
-        return FXGL.getGameState();
-    }
-
-    private double getHeight() {
-        return FXGL.getAppHeight();
-    }
-
-    private double getWidth() {
-        return FXGL.getAppWidth();
-    }
 }

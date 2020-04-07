@@ -1,7 +1,6 @@
 package ca.ciccc.coronarace.component;
 
 import ca.ciccc.coronarace.Config;
-import com.almasb.fxgl.entity.component.Component;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -11,7 +10,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-public class StreetlineComponent extends Component {
+public class StreetlineComponent extends CoronaRaceComponentAbstract {
 
     private final SortedSet<Rectangle> collection;
 

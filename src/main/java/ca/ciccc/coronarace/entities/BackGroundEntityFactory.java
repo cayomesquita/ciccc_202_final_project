@@ -7,7 +7,7 @@ import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class BackGroundEntityFactory implements EntityFactory {
+public class BackGroundEntityFactory extends CoronaRaceEntityFactoryAbstract {
 
     public static final double WIDTH_PERCENT = 0.025;
     public static final double HEIGHT_PERCENT = 0.2;
