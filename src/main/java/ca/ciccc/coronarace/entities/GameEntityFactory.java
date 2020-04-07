@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
 public class GameEntityFactory extends CoronaRaceEntityFactoryAbstract {
 
     @Spawns("bar")
-    public Entity newPlayer(SpawnData data) {
+    public Entity newBar(SpawnData data) {
         ProgressBar bar = new ProgressBar(false);
         bar.setHeight(20.0);
         bar.setWidth(200.0);

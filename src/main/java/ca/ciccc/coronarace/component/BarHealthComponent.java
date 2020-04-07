@@ -11,7 +11,7 @@ public class BarHealthComponent extends CoronaRaceComponentAbstract {
         ProgressBar bar = (ProgressBar) entity.getView().getNodes().iterator().next();
         bar.setMaxValue(playerHealthComponent.getMaxValue());
         bar.currentValueProperty().setValue(50);
-//        bar.currentValueProperty().bind(playerHealthComponent.valueProperty());
+        bar.currentValueProperty().bind(playerHealthComponent.valueProperty());
     }
 
     @Override

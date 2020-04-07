@@ -83,6 +83,8 @@ public class CoronaRaceApp extends GameApplication {
         input.addInputMapping(new InputMapping("down",KeyCode.DOWN));
         input.addInputMapping(new InputMapping("left",KeyCode.LEFT));
         input.addInputMapping(new InputMapping("right",KeyCode.RIGHT));
+        input.addInputMapping(new InputMapping("test",KeyCode.T));
+
     }
 
 

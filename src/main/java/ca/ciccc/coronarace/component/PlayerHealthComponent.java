@@ -1,13 +1,18 @@
 package ca.ciccc.coronarace.component;
 
+import com.almasb.fxgl.app.FXGL;
 import com.almasb.fxgl.extra.entity.components.HealthComponent;
+import com.almasb.fxgl.input.ActionType;
+import com.almasb.fxgl.input.OnUserAction;
 
 public class PlayerHealthComponent extends HealthComponent {
 
     private static final int DEFAULT_MAX_VALUE = 100;
-    private static final int DEFAULT_VALUE = 50;
+    private static final int DEFAULT_VALUE = DEFAULT_MAX_VALUE;
 
     private int maxValue;
+    private double timeCount = 0.0;
+    private double timeLoop = 1.0;
 
     public PlayerHealthComponent() {
         super(DEFAULT_VALUE);
@@ -22,8 +27,12 @@ public class PlayerHealthComponent extends HealthComponent {
     @Override
     public void onUpdate(double tpf) {
         super.onUpdate(tpf);
-        decrease(1);
-//        FXGL.getGameState().setValue("health",valueProperty().getValue());
+        timeCount += tpf;
+        if (timeCount > timeLoop) {
+            timeCount = 0;
+            decrease(1);
+            FXGL.getGameState().setValue("health", valueProperty().getValue());
+        }
     }
 
     @Override
@@ -43,5 +52,10 @@ public class PlayerHealthComponent extends HealthComponent {
 
     public int getMaxValue() {
         return maxValue;
+    }
+
+    @OnUserAction(name = "test", type = ActionType.ON_ACTION_BEGIN)
+    public void test() {
+        increase(10);
     }
 }
