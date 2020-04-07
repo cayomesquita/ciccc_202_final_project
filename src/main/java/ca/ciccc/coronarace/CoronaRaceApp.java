@@ -2,17 +2,14 @@ package ca.ciccc.coronarace;
 
 import ca.ciccc.coronarace.entities.BackGroundEntityFactory;
 import ca.ciccc.coronarace.entities.EntityType;
+import ca.ciccc.coronarace.entities.GameEntityFactory;
 import ca.ciccc.coronarace.entities.PlayerEntityFactory;
 import com.almasb.fxgl.app.GameApplication;
-import com.almasb.fxgl.entity.Entities;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.input.Input;
 import com.almasb.fxgl.input.InputMapping;
-import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.settings.GameSettings;
 import javafx.scene.input.KeyCode;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 import java.util.List;
@@ -38,12 +35,14 @@ public class CoronaRaceApp extends GameApplication {
     protected void initGameVars(Map<String, Object> vars) {
         vars.put("DxDy", "X:0000.00 Y:0000.00");
         vars.put("streetSpeed", Config.STREET_SPEED);
+        vars.put("health", 0);
     }
 
     @Override
     protected void initGame() {
         getGameWorld().addEntityFactory(new BackGroundEntityFactory());
         getGameWorld().addEntityFactory(new PlayerEntityFactory());
+        getGameWorld().addEntityFactory(new GameEntityFactory());
     }
 
     @Override
@@ -58,11 +57,17 @@ public class CoronaRaceApp extends GameApplication {
         textSpeed.setTranslateY(120); // y = 100
         textSpeed.textProperty().bind(getGameState().doubleProperty("streetSpeed").asString());
         getGameScene().addUINode(textSpeed); // add to the scene graph
+        Text textHealth = new Text();
+        textHealth.setTranslateX(50); // x = 50
+        textHealth.setTranslateY(140); // y = 100
+        textHealth.textProperty().bind(getGameState().intProperty("health").asString());
+        getGameScene().addUINode(textHealth); // add to the scene graph
 
         getGameWorld().spawn("street");
         getGameWorld().spawn("sidewalk");
         getGameWorld().spawn("streetline");
         getGameWorld().spawn("player");
+        getGameWorld().spawn("bar");
 
         Input input = getInput();
         List<Entity> entities = getGameWorld().getEntitiesByType(EntityType.PLAYER);
@@ -73,8 +78,6 @@ public class CoronaRaceApp extends GameApplication {
     @Override
     protected void initInput() {
         Input input = getInput();
-        List<Entity> entities = getGameWorld().getEntitiesByType(EntityType.PLAYER);
-        getGameWorld().getEntitiesByType(EntityType.PLAYER).forEach(entity -> entity.getComponents().forEach(component -> input.scanForUserActions(component)));
 
         input.addInputMapping(new InputMapping("up",KeyCode.UP));
         input.addInputMapping(new InputMapping("down",KeyCode.DOWN));
