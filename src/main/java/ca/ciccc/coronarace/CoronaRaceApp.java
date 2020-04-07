@@ -28,17 +28,10 @@ public class CoronaRaceApp extends GameApplication {
 
     @Override
     protected void initSettings(GameSettings settings) {
-<<<<<<< HEAD
-        settings.setWidth(600);
-        settings.setHeight(900);
-        settings.setTitle("CoronaRace");
-        settings.setVersion("0.1");
-=======
         settings.setWidth(Config.WIDTH);
         settings.setHeight(Config.HEIGHT);
         settings.setTitle(Config.TITLE_CORONA_RACE);
         settings.setVersion(Config.VERSION);
->>>>>>> 8be242a893de6b593b13339b4d1dabce60d410d8
     }
 
     @Override
@@ -66,8 +59,6 @@ public class CoronaRaceApp extends GameApplication {
         textSpeed.textProperty().bind(getGameState().doubleProperty("streetSpeed").asString());
         getGameScene().addUINode(textSpeed); // add to the scene graph
 
-<<<<<<< HEAD
-=======
         getGameWorld().spawn("street");
         getGameWorld().spawn("sidewalk");
         getGameWorld().spawn("streetline");
@@ -78,8 +69,6 @@ public class CoronaRaceApp extends GameApplication {
         getGameWorld().getEntitiesByType(EntityType.PLAYER).forEach(entity -> entity.getComponents().forEach(component -> input.scanForUserActions(component)));
     }
 
-
->>>>>>> 8be242a893de6b593b13339b4d1dabce60d410d8
     @Override
     protected void initInput() {
         Input input = getInput();
@@ -91,9 +80,4 @@ public class CoronaRaceApp extends GameApplication {
         input.addInputMapping(new InputMapping("left",KeyCode.LEFT));
         input.addInputMapping(new InputMapping("right",KeyCode.RIGHT));
     }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 8be242a893de6b593b13339b4d1dabce60d410d8
 }
