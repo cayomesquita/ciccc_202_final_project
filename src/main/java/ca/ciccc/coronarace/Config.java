@@ -33,11 +33,29 @@ public final class Config {
 
     private Config() {}
 
+    // GAME VARIABLES
     public static final String TITLE_CORONA_RACE = "Corona Race";
     public static final String VERSION = "0.1";
+
+    // GENERAL VARIABLES
     public static final int WIDTH = 600;
     public static final int HEIGHT = 600;
+    public static final int LEVEL = 1;
+
+    // STREET VARIABLES
     public static final double STREETLINE_DISTANCE_PERCENT = 0.75;
-    public static final double STREET_SPEED = 10.0;
+    public static final double STREET_SPEED = 20.0;
+
+    // ENEMY VARIABLES
+
+    public static final double  WIDTH_PERCENT       = 0.025,
+                                HEIGHT_PERCENT      = 0.2,
+                                xLeft               =  Config.WIDTH * (1 - WIDTH_PERCENT) / 3,        //  600 * (1 - .025) / 2;       = 195
+                                xCenter             =  Config.WIDTH * (1 - WIDTH_PERCENT) / 2,        //  600 * (1 - .025) / 2;       = 292.5
+                                xRight              = (Config.WIDTH * (1 - WIDTH_PERCENT) / 3) * 2,   // (600 * (1 - .025) / 2) * 2;  = 390
+                                ENEMY_HEIGHT        = 50,
+                                ENEMY_WIDTH         = 50,
+                                ENEMY_DISTANCE      = 150,
+                                ENEMIES_LEVEL_ONE   = 10;
 
 }
