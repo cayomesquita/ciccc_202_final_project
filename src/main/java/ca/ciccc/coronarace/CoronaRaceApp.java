@@ -4,8 +4,10 @@ import ca.ciccc.coronarace.entities.BackGroundEntityFactory;
 import ca.ciccc.coronarace.entities.EntityType;
 import ca.ciccc.coronarace.entities.GameEntityFactory;
 import ca.ciccc.coronarace.entities.PlayerEntityFactory;
+import ca.ciccc.coronarace.event.GameEventHandler;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.entity.Entity;
+import com.almasb.fxgl.event.EventBus;
 import com.almasb.fxgl.input.Input;
 import com.almasb.fxgl.input.InputMapping;
 import com.almasb.fxgl.settings.GameSettings;
@@ -36,6 +38,13 @@ public class CoronaRaceApp extends GameApplication {
         vars.put("DxDy", "X:0000.00 Y:0000.00");
         vars.put("streetSpeed", Config.STREET_SPEED);
         vars.put("health", 0);
+    }
+
+    @Override
+    protected void preInit() {
+        super.preInit();
+        EventBus eventBus = getEventBus();
+        eventBus.scanForHandlers(new GameEventHandler());
     }
 
     @Override
