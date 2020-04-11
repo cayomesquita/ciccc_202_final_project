@@ -5,6 +5,7 @@ import ca.ciccc.coronarace.entities.EntityType;
 import ca.ciccc.coronarace.entities.GameEntityFactory;
 import ca.ciccc.coronarace.entities.PlayerEntityFactory;
 import ca.ciccc.coronarace.event.GameEventHandler;
+import ca.ciccc.coronarace.collision.HomeCollisionHandler;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.event.EventBus;
@@ -36,7 +37,7 @@ public class CoronaRaceApp extends GameApplication {
     @Override
     protected void initGameVars(Map<String, Object> vars) {
         vars.put("DxDy", "X:0000.00 Y:0000.00");
-        vars.put("streetSpeed", Config.STREET_SPEED);
+        vars.put("gameSpeed", Config.STREET_SPEED);
         vars.put("health", 0);
     }
 
@@ -64,7 +65,7 @@ public class CoronaRaceApp extends GameApplication {
         Text textSpeed = new Text();
         textSpeed.setTranslateX(50); // x = 50
         textSpeed.setTranslateY(120); // y = 100
-        textSpeed.textProperty().bind(getGameState().doubleProperty("streetSpeed").asString());
+        textSpeed.textProperty().bind(getGameState().doubleProperty("gameSpeed").asString());
         getGameScene().addUINode(textSpeed); // add to the scene graph
         Text textHealth = new Text();
         textHealth.setTranslateX(50); // x = 50
@@ -77,6 +78,7 @@ public class CoronaRaceApp extends GameApplication {
         getGameWorld().spawn("streetline");
         getGameWorld().spawn("player");
         getGameWorld().spawn("bar");
+        getGameWorld().spawn("home");
 
         Input input = getInput();
         List<Entity> entities = getGameWorld().getEntitiesByType(EntityType.PLAYER);
@@ -88,13 +90,17 @@ public class CoronaRaceApp extends GameApplication {
     protected void initInput() {
         Input input = getInput();
 
-        input.addInputMapping(new InputMapping("up",KeyCode.UP));
-        input.addInputMapping(new InputMapping("down",KeyCode.DOWN));
-        input.addInputMapping(new InputMapping("left",KeyCode.LEFT));
-        input.addInputMapping(new InputMapping("right",KeyCode.RIGHT));
-        input.addInputMapping(new InputMapping("test",KeyCode.T));
+        input.addInputMapping(new InputMapping("up", KeyCode.UP));
+        input.addInputMapping(new InputMapping("down", KeyCode.DOWN));
+        input.addInputMapping(new InputMapping("left", KeyCode.LEFT));
+        input.addInputMapping(new InputMapping("right", KeyCode.RIGHT));
+        input.addInputMapping(new InputMapping("test", KeyCode.T));
 
     }
 
-
+    @Override
+    protected void initPhysics() {
+        super.initPhysics();
+        getPhysicsWorld().addCollisionHandler(new HomeCollisionHandler());
+    }
 }
