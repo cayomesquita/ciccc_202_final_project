@@ -17,7 +17,8 @@ public class StreetlineComponent extends Component {
 
     public StreetlineComponent() {
         super();
-        this.collection = new TreeSet<Rectangle>((rec1, rec2) -> Double.compare(rec1.getTranslateY(), rec2.getTranslateY()));
+        this.collection = new TreeSet<Rectangle>(
+                (rec1, rec2) -> Double.compare(rec1.getTranslateY(), rec2.getTranslateY()));
     }
 
     @Override

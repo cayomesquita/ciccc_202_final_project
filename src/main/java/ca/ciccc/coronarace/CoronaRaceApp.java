@@ -1,9 +1,6 @@
 package ca.ciccc.coronarace;
 
-import ca.ciccc.coronarace.entities.BackGroundEntityFactory;
-import ca.ciccc.coronarace.entities.EnemyEntityFactory;
-import ca.ciccc.coronarace.entities.EntityType;
-import ca.ciccc.coronarace.entities.PlayerEntityFactory;
+import ca.ciccc.coronarace.entities.*;
 
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.entity.Entities;
@@ -19,6 +16,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class CoronaRaceApp extends GameApplication {
 
@@ -44,19 +42,13 @@ public class CoronaRaceApp extends GameApplication {
         vars.put("streetSpeed", Config.STREET_SPEED);
     }
 
-    // TEST OF TEXTURES
-    private Texture enemyOneTexture, enemyTwoTexture, enemyThreeTexture;
-    //@Override
-    protected void initAssests(){
-        enemyOneTexture   = getAssetLoader().loadTexture("enemyOne.png");
-        enemyTwoTexture   = getAssetLoader().loadTexture("enemyTwo.png");
-        enemyThreeTexture = getAssetLoader().loadTexture("enemyThree.png");
-    }
     @Override
     protected void initGame() {
+        Config.setLEVEL(1);
         getGameWorld().addEntityFactory(new BackGroundEntityFactory());
         getGameWorld().addEntityFactory(new PlayerEntityFactory());
         getGameWorld().addEntityFactory(new EnemyEntityFactory());
+        getGameWorld().addEntityFactory(new MedicineEntityFactory());
     }
 
     @Override
@@ -76,7 +68,11 @@ public class CoronaRaceApp extends GameApplication {
         getGameWorld().spawn("sidewalk");
         getGameWorld().spawn("streetline");
         getGameWorld().spawn("player");
-        getGameWorld().spawn("enemy");
+        for (int i = 1; i <= Config.getMaxEnemies(); i++) {
+            Random nRandom = new Random();
+            getGameWorld().spawn("enemy");
+            getGameWorld().spawn("medicine");
+        }
 
         Input input = getInput();
         List<Entity> entities = getGameWorld().getEntitiesByType(EntityType.PLAYER);

@@ -40,22 +40,48 @@ public final class Config {
     // GENERAL VARIABLES
     public static final int WIDTH = 600;
     public static final int HEIGHT = 600;
-    public static final int LEVEL = 1;
+
+    private static int           LEVEL = 0;
+    public static int            getLevel()             { return LEVEL; }
+    public static void           setLEVEL(int setLEVEL) { LEVEL = setLEVEL; }
+
+    private static final double  xLeft           = 100,
+                                 xCenterL        = 200,
+                                 xCenterR        = 300,
+                                 xRight          = 400;
+    public static double getXLeft   () { return xLeft; }
+    public static double getXCenterL() { return xCenterL; }
+    public static double getXCenterR() { return xCenterR; }
+    public static double getXRight  () { return xRight; }
 
     // STREET VARIABLES
-    public static final double STREETLINE_DISTANCE_PERCENT = 0.75;
-    public static final double STREET_SPEED = 20.0;
+    public static final double  STREETLINE_DISTANCE_PERCENT = 0.75;
+    public static final double  STREET_SPEED      = 100.0;
+    public static       double  DISTANCE_OBJECT   = 200,
+                                POSITION_X_OBJECT = 0,
+                                POSITION_Y_OBJECT = 0;
+    public static void setPOSITION_X_OBJECT (double setPOSITION_X_OBJECT) { POSITION_X_OBJECT = setPOSITION_X_OBJECT; }
+    public static void setPOSITION_Y_OBJECT (double setPOSITION_Y_OBJECT) { POSITION_Y_OBJECT = setPOSITION_Y_OBJECT; }
+    public static void setDISTANCE_OBJECT   (double setDISTANCE_OBJECT)   { DISTANCE_OBJECT   = setDISTANCE_OBJECT;   }
+    public static double getPositionXObject ()                            { return POSITION_X_OBJECT; }
+    public static double getPositionYObject ()                            { return POSITION_Y_OBJECT; }
+    public static double getDistanceObject  ()                            { return DISTANCE_OBJECT;   }
 
     // ENEMY VARIABLES
-
-    public static final double  WIDTH_PERCENT       = 0.025,
-                                HEIGHT_PERCENT      = 0.2,
-                                xLeft               =  Config.WIDTH * (1 - WIDTH_PERCENT) / 3,        //  600 * (1 - .025) / 2;       = 195
-                                xCenter             =  Config.WIDTH * (1 - WIDTH_PERCENT) / 2,        //  600 * (1 - .025) / 2;       = 292.5
-                                xRight              = (Config.WIDTH * (1 - WIDTH_PERCENT) / 3) * 2,   // (600 * (1 - .025) / 2) * 2;  = 390
-                                ENEMY_HEIGHT        = 50,
-                                ENEMY_WIDTH         = 50,
-                                ENEMY_DISTANCE      = 150,
-                                ENEMIES_LEVEL_ONE   = 10;
-
+    private static double   ENEMY_HEIGHT    = 100,
+                            ENEMY_WIDTH     = 100,
+                            MAX_ENEMIES     = 0;
+    public static void setENEMY_HEIGHT     (double setENEMY_HEIGHT)     { ENEMY_HEIGHT     = setENEMY_HEIGHT;     }
+    public static void setENEMY_WIDTH      (double setENEMY_WIDTH)      { ENEMY_WIDTH      = setENEMY_WIDTH;      }
+    public static void setMAX_ENEMIES      (double setMAX_ENEMIES)      { MAX_ENEMIES      = setMAX_ENEMIES;      }
+    public static double getEnemyHeight()    { return ENEMY_HEIGHT; }
+    public static double getEnemyWidth()     { return ENEMY_WIDTH; }
+    public static double getMaxEnemies() {
+        switch (LEVEL){
+            case 1: MAX_ENEMIES = 30; break;
+            case 2: MAX_ENEMIES = 40; break;
+            case 3: MAX_ENEMIES = 50; break;
+        }
+        return MAX_ENEMIES;
+    }
 }
