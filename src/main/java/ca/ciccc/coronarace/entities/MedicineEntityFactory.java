@@ -23,7 +23,7 @@ public class MedicineEntityFactory implements EntityFactory {
         }
         Config.setPOSITION_Y_OBJECT(Config.getPositionYObject() - Config.getDistanceObject());
         return Entities.builder()
-                .type(EntityType.ENEMY)
+                .type(EntityType.MEDICINE)
                 //.viewFromNode(new Rectangle(70, 70))
                 .viewFromTexture(imagePath+".png")
                 //.bbox(new HitBox(BoundingShape.box(50, 100)))             // I dont know what it is

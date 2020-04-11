@@ -1,7 +1,6 @@
 package ca.ciccc.coronarace.component;
 
 import ca.ciccc.coronarace.Config;
-import com.almasb.fxgl.entity.component.Component;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -11,7 +10,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-public class StreetlineComponent extends Component {
+public class StreetlineComponent extends CoronaRaceComponentAbstract {
 
     private final SortedSet<Rectangle> collection;
 
@@ -36,7 +35,7 @@ public class StreetlineComponent extends Component {
     @Override
     public void onUpdate(double tpf) {
         super.onUpdate(tpf);
-        double speed = (Config.STREET_SPEED) * tpf;
+        double speed = getGameSpeed() * tpf;
         collection.forEach(rectangle -> rectangle.setTranslateY(rectangle.getTranslateY() + speed));
         double distance = collection.first().getHeight() * Config.STREETLINE_DISTANCE_PERCENT;
         if (collection.first().getTranslateY() >= distance) {

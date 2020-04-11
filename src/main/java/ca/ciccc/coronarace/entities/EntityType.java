@@ -1,6 +1,5 @@
 package ca.ciccc.coronarace.entities;
 
 public enum EntityType {
-    PLAYER,
-    ENEMY
+    PLAYER, ENEMY, MEDICINE, BAR, HOME
 }
