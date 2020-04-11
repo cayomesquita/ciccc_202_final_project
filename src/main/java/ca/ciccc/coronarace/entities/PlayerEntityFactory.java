@@ -6,6 +6,7 @@ import com.almasb.fxgl.entity.Entities;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
+import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.physics.BoundingShape;
 import com.almasb.fxgl.physics.HitBox;
 import javafx.scene.Node;
@@ -21,9 +22,9 @@ public class PlayerEntityFactory extends CoronaRaceEntityFactoryAbstract {
         double initialWidth = (getWidth() - 50) / 2;
         return Entities.builder()
                 .type(EntityType.PLAYER)
-                .viewFromNode(node)
+                .viewFromNodeWithBBox(node)
                 .bbox(new HitBox(BoundingShape.box(50, 100)))
-                .with(new PlayerComponent(), new PlayerHealthComponent())
+                .with(new PlayerComponent(), new PlayerHealthComponent(), new CollidableComponent(true))
                 .at(initialWidth, initialHeight)
                 .build();
     }

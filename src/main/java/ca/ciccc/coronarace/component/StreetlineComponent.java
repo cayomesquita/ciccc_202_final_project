@@ -34,7 +34,7 @@ public class StreetlineComponent extends CoronaRaceComponentAbstract {
     @Override
     public void onUpdate(double tpf) {
         super.onUpdate(tpf);
-        double speed = (Config.STREET_SPEED) * tpf;
+        double speed = getGameSpeed() * tpf;
         collection.forEach(rectangle -> rectangle.setTranslateY(rectangle.getTranslateY() + speed));
         double distance = collection.first().getHeight() * Config.STREETLINE_DISTANCE_PERCENT;
         if (collection.first().getTranslateY() >= distance) {

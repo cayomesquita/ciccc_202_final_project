@@ -30,4 +30,8 @@ public abstract class CoronaRaceComponentAbstract extends Component {
     protected GameWorld getGameWorld() {
         return FXGL.getGameWorld();
     }
+
+    protected Double getGameSpeed() {
+        return FXGL.getGameState().getDouble("gameSpeed");
+    }
 }

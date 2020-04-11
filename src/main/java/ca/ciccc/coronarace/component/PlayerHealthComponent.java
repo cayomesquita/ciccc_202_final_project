@@ -1,5 +1,6 @@
 package ca.ciccc.coronarace.component;
 
+import ca.ciccc.coronarace.event.GameEvent;
 import com.almasb.fxgl.app.FXGL;
 import com.almasb.fxgl.extra.entity.components.HealthComponent;
 import com.almasb.fxgl.input.ActionType;
@@ -32,6 +33,9 @@ public class PlayerHealthComponent extends HealthComponent {
             timeCount = 0;
             decrease(1);
             FXGL.getGameState().setValue("health", valueProperty().getValue());
+        }
+        if (valueProperty().get() <= 0) {
+            FXGL.getEventBus().fireEvent(new GameEvent(GameEvent.GAME_FAIL));
         }
     }
 
