@@ -48,7 +48,6 @@ public class PlayerHealthComponent extends HealthComponent {
         Number newValue = valueProperty().getValue() - value;
         valueProperty().setValue(newValue.intValue() > 0 ? newValue : 0);
     }
-
     public void increase(int value) {
         Number newValue = valueProperty().getValue() + value;
         valueProperty().setValue(newValue.intValue() < this.maxValue ? newValue : this.maxValue);
@@ -58,8 +57,12 @@ public class PlayerHealthComponent extends HealthComponent {
         return maxValue;
     }
 
-    @OnUserAction(name = "increaseBar", type = ActionType.ON_ACTION_BEGIN)
-    public void increaseBar() {
+    /**
+    @OnUserAction(name = "increaseBar", type = ActionType.ON_ACTION_BEGIN) public void increaseBar() {
         increase(10);
     }
+    @OnUserAction(name = "decreaseBar", type = ActionType.ON_ACTION_BEGIN) public void decreaseBar() {
+        increase(-10);
+    }
+    */
 }

@@ -7,6 +7,8 @@ import ca.ciccc.coronarace.entities.GameEntityFactory;
 import ca.ciccc.coronarace.entities.PlayerEntityFactory;
 import ca.ciccc.coronarace.event.GameEventHandler;
 import ca.ciccc.coronarace.collision.HomeCollisionHandler;
+import ca.ciccc.coronarace.collision.EnemyCollisionHandler;
+import ca.ciccc.coronarace.collision.MedicineCollisionHandler;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.event.EventBus;
@@ -112,19 +114,14 @@ public class CoronaRaceApp extends GameApplication {
         input.addInputMapping(new InputMapping("left", KeyCode.LEFT));
         input.addInputMapping(new InputMapping("right", KeyCode.RIGHT));
 
-        input.addInputMapping(new InputMapping("increaseBar", KeyCode.T));
+        //input.addInputMapping(new InputMapping("increaseBar", KeyCode.T));
+        //input.addInputMapping(new InputMapping("decreaseBar", KeyCode.D));
     }
     @Override
     protected void initPhysics() {
         super.initPhysics();
         getPhysicsWorld().addCollisionHandler(new HomeCollisionHandler());
-
-        getPhysicsWorld().addCollisionHandler(new CollisionHandler(EntityType.PLAYER, EntityType.MEDICINE) {
-            @Override
-            protected void onCollisionBegin(Entity player, Entity medicine) {
-                medicine.removeFromWorld();
-
-            }
-        });
+        getPhysicsWorld().addCollisionHandler(new EnemyCollisionHandler());
+        getPhysicsWorld().addCollisionHandler(new MedicineCollisionHandler());
     }
 }
