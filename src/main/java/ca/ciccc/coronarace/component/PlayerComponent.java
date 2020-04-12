@@ -64,7 +64,7 @@ public class PlayerComponent extends CoronaRaceComponentAbstract {
 
     @OnUserAction(name = "left", type = ActionType.ON_ACTION)
     public void moveLeft() {
-        if (entity.getX() > 0) {
+        if (entity.getX() > 80) {
             entity.translateX(-5); // move left 5 pixels
             getGameState().setValue("DxDy", String.format("X:%4.2f Y:%4.2f", entity.getX(), entity.getY()));
         }
@@ -72,7 +72,7 @@ public class PlayerComponent extends CoronaRaceComponentAbstract {
 
     @OnUserAction(name = "right", type = ActionType.ON_ACTION)
     public void moveRight() {
-        if (entity.getX() < getWidth() - entity.getBoundingBoxComponent().getWidth()) {
+        if (entity.getX() < getWidth() - entity.getBoundingBoxComponent().getWidth() - 130) {
             entity.translateX(5); // move right 5 pixels
             getGameState().setValue("DxDy", String.format("X:%4.2f Y:%4.2f", entity.getX(), entity.getY()));
         }

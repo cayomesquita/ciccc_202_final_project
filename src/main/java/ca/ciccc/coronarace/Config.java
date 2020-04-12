@@ -12,11 +12,30 @@ public final class Config {
     public static final int  WIDTH  = 600;
     public static final int  HEIGHT = 600;
     private static int  N_MEDICINES = 2,
+                        N_TREES     = 100,
                         LEVEL       = 0;
-    public static int        getLevel      ()                  { return LEVEL; }
     public static int        getN_Medicines()                  { return N_MEDICINES; }
-    public static void       setLEVEL      (int setLEVEL)      { LEVEL = setLEVEL; }
+    public static int        getN_Trees    ()                  { return N_TREES; }
+    public static int        getLevel      ()                  { return LEVEL; }
     public static void       setN_MEDICINES(int setN_MEDICINE) { N_MEDICINES = setN_MEDICINE; }
+    public static void       setLEVEL      (int setLEVEL)      { LEVEL = setLEVEL; }
+
+    private static       double  nComplementsX   = 2,
+                                 ComplementLeft  = 15,
+                                 ComplementRight = 510;
+    public static double getComplementsX   () { return nComplementsX; }
+    public static double getComplementLeft  () { return ComplementLeft; }
+    public static double getComplementRight () { return ComplementRight; }
+
+    public static       double  DISTANCE_COMPLEMENT   = 0,
+                                POSITION_X_COMPLEMENT = 0,
+                                POSITION_Y_COMPLEMENT = 0;
+    public static void setDISTANCE_COMPLEMENT   (double setDISTANCE_COMPLEMENT)   { DISTANCE_COMPLEMENT   = setDISTANCE_COMPLEMENT;   }
+    public static void setPOSITION_X_COMPLEMENT (double setPOSITION_X_COMPLEMENT) { POSITION_X_COMPLEMENT = setPOSITION_X_COMPLEMENT; }
+    public static void setPOSITION_Y_COMPLEMENT (double setPOSITION_Y_COMPLEMENT) { POSITION_Y_COMPLEMENT = setPOSITION_Y_COMPLEMENT; }
+    public static double getDistanceComplement  ()                            { return DISTANCE_COMPLEMENT;   }
+    public static double getPositionXComplement ()                            { return POSITION_X_COMPLEMENT; }
+    public static double getPositionYComplement ()                            { return POSITION_Y_COMPLEMENT; }
 
     private static       double  nPositionsX     = 4,
                                  xLeft           = 100,
@@ -32,7 +51,7 @@ public final class Config {
     // STREET VARIABLES
     public static final double  STREETLINE_DISTANCE_PERCENT = 0.75;
     public static final double  STREET_SPEED      = 100.0;
-    public static       double  DISTANCE_OBJECT   = 200,
+    public static       double  DISTANCE_OBJECT   = 240,
                                 POSITION_X_OBJECT = 0,
                                 POSITION_Y_OBJECT = 0;
     public static void setPOSITION_X_OBJECT (double setPOSITION_X_OBJECT) { POSITION_X_OBJECT = setPOSITION_X_OBJECT; }
@@ -43,8 +62,8 @@ public final class Config {
     public static double getDistanceObject  ()                            { return DISTANCE_OBJECT;   }
 
     // ENEMY VARIABLES
-    private static double   ENEMY_HEIGHT    = 100,
-                            ENEMY_WIDTH     = 100,
+    private static double   ENEMY_HEIGHT    = 60,
+                            ENEMY_WIDTH     = 45,
                             MAX_ENEMIES     = 0;
     public static void setENEMY_HEIGHT     (double setENEMY_HEIGHT)     { ENEMY_HEIGHT     = setENEMY_HEIGHT;     }
     public static void setENEMY_WIDTH      (double setENEMY_WIDTH)      { ENEMY_WIDTH      = setENEMY_WIDTH;      }
@@ -53,11 +72,11 @@ public final class Config {
     public static double getEnemyWidth()     { return ENEMY_WIDTH; }
     public static double getMaxEnemies() {
         switch (LEVEL){
-            case 1: MAX_ENEMIES = 20; break;
-            case 2: MAX_ENEMIES = 30; break;
-            case 3: MAX_ENEMIES = 40; break;
-            case 4: MAX_ENEMIES = 50; break;
-            case 5: MAX_ENEMIES = 60; break;
+            case 1: MAX_ENEMIES = 10; break;
+            case 2: MAX_ENEMIES = 20; break;
+            case 3: MAX_ENEMIES = 30; break;
+            case 4: MAX_ENEMIES = 40; break;
+            case 5: MAX_ENEMIES = 50; break;
         }
         return MAX_ENEMIES;
     }

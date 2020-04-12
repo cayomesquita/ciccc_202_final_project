@@ -52,6 +52,7 @@ public class CoronaRaceApp extends GameApplication {
         vars.put("DxDy", "X:0000.00 Y:0000.00");
         vars.put("gameSpeed", Config.STREET_SPEED);
         vars.put("health", 0);
+        Config.setLEVEL(1);
     }
 
     @Override
@@ -63,16 +64,17 @@ public class CoronaRaceApp extends GameApplication {
 
     @Override
     protected void initGame() {
-        Config.setLEVEL(1);
         getGameWorld().addEntityFactory(new BackGroundEntityFactory());
-        getGameWorld().addEntityFactory(new PlayerEntityFactory());
+        getGameWorld().addEntityFactory(new ComplementEntityFactory());
+        getGameWorld().addEntityFactory(new GameEntityFactory());
         getGameWorld().addEntityFactory(new EnemyEntityFactory());
         getGameWorld().addEntityFactory(new MedicineEntityFactory());
-        getGameWorld().addEntityFactory(new GameEntityFactory());
+        getGameWorld().addEntityFactory(new PlayerEntityFactory());
     }
 
     @Override
     protected void initUI() {
+        Random nRandom = new Random();
         Text textPixels = new Text();
              textPixels.setTranslateX(50); // x = 50
              textPixels.setTranslateY(100); // y = 100
@@ -90,18 +92,25 @@ public class CoronaRaceApp extends GameApplication {
         //getGameScene().addUINode(textSpeed); // add to the scene graph
         //getGameScene().addUINode(textHealth); // add to the scene graph
 
-        getGameWorld().spawn("street");
         getGameWorld().spawn("sidewalk");
-        getGameWorld().spawn("streetline");
-        getGameWorld().spawn("player");
+        getGameWorld().spawn("street");
+        for (int i = 0; i < Config.getN_Trees(); i++) {
+            switch (nRandom.nextInt(3)) {
+                case 0: Config.setDISTANCE_COMPLEMENT(100); break;
+                case 1: Config.setDISTANCE_COMPLEMENT(200); break;
+                case 2: Config.setDISTANCE_COMPLEMENT(300); break;
+                case 3: Config.setDISTANCE_COMPLEMENT(350); break;
+            }
+            getGameWorld().spawn("tree");
+        }
+        //getGameWorld().spawn("streetline");
         //getGameWorld().spawn("bar");
-
-        Random nRandom = new Random();
         for (int i = 1; i <= Config.getMaxEnemies(); i++) {
             if (nRandom.nextInt(3) != 4) getGameWorld().spawn("enemy");
             if (nRandom.nextInt(3) == 0) getGameWorld().spawn("medicine");
         }
         getGameWorld().spawn("home");
+        getGameWorld().spawn("player");
 
         Input input = getInput();
         getGameWorld().getEntitiesByType(EntityType.PLAYER).forEach(entity -> entity.getComponents().forEach(component -> input.scanForUserActions(component)));
@@ -125,7 +134,5 @@ public class CoronaRaceApp extends GameApplication {
         getPhysicsWorld().addCollisionHandler(new HomeCollisionHandler());
         getPhysicsWorld().addCollisionHandler(new EnemyCollisionHandler());
         getPhysicsWorld().addCollisionHandler(new MedicineCollisionHandler());
-
-
     }
 }

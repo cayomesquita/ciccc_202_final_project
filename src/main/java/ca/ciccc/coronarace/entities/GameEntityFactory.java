@@ -37,12 +37,13 @@ public class GameEntityFactory extends CoronaRaceEntityFactoryAbstract {
 
     @Spawns("home")
     public Entity newHome(SpawnData data) {
-        Rectangle home = new Rectangle(getWidth() * 0.66, 80.0, Color.LIGHTSEAGREEN);
+        //Rectangle home = new Rectangle(getWidth() * 0.66, 80.0, Color.LIGHTSEAGREEN);
         Config.setPOSITION_Y_OBJECT(Config.getPositionYObject() - Config.getDistanceObject());
         return Entities.builder()
                 .type(EntityType.HOME)
                 .renderLayer(RenderLayer.TOP)
-                .viewFromNode(home)
+                //.viewFromNode(home)
+                .viewFromTexture("home1.png")
                 .bbox(new HitBox(BoundingShape.box(getWidth(), 80.0)))
                 .with(new CollidableComponent(true), new HomeComponent())
                 .at(100, Config.getPositionYObject())

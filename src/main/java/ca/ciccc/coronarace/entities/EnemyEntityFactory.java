@@ -23,7 +23,7 @@ public class EnemyEntityFactory implements EntityFactory {
     public Entity newEnemy(SpawnData data) {
         Random nRandom = new Random();
         String imagePath = "";
-        switch (nRandom.nextInt((int) Config.getnPositionsX())){
+        switch (nRandom.nextInt((int) Config.getnPositionsX()-1)){
             case 0: Config.setPOSITION_X_OBJECT(Config.getXLeft());     imagePath = "enemyLeft";    break;
             case 1: Config.setPOSITION_X_OBJECT(Config.getXCenterL());  imagePath = "enemyCenterL"; break;
             case 2: Config.setPOSITION_X_OBJECT(Config.getXCenterR());  imagePath = "enemyCenterR"; break;
@@ -33,7 +33,7 @@ public class EnemyEntityFactory implements EntityFactory {
         return Entities.builder()
                 .type(EntityType.ENEMY)
                 .viewFromTexture(imagePath+".png")
-                .bbox(new HitBox(BoundingShape.box(50, 70)))
+                .bbox(new HitBox(BoundingShape.box(Config.getEnemyWidth(), Config.getEnemyHeight())))
                 .with(new EnemyComponent(), new CollidableComponent(true))
                 .at(Config.getPositionXObject(), Config.getPositionYObject())
                 .build();
