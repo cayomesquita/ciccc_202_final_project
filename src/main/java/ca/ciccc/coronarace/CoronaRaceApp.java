@@ -1,5 +1,6 @@
 package ca.ciccc.coronarace;
 
+import ca.ciccc.coronarace.component.PlayerHealthComponent;
 import ca.ciccc.coronarace.entities.*;
 import ca.ciccc.coronarace.entities.BackGroundEntityFactory;
 import ca.ciccc.coronarace.entities.EntityType;
@@ -9,8 +10,11 @@ import ca.ciccc.coronarace.event.GameEventHandler;
 import ca.ciccc.coronarace.collision.HomeCollisionHandler;
 import ca.ciccc.coronarace.collision.EnemyCollisionHandler;
 import ca.ciccc.coronarace.collision.MedicineCollisionHandler;
+import com.almasb.fxgl.app.FXGL;
 import com.almasb.fxgl.app.GameApplication;
+import com.almasb.fxgl.core.collection.Array;
 import com.almasb.fxgl.entity.Entity;
+import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.event.EventBus;
 import com.almasb.fxgl.input.Input;
 import com.almasb.fxgl.input.InputMapping;
@@ -19,6 +23,8 @@ import com.almasb.fxgl.settings.GameSettings;
 import com.almasb.fxgl.texture.Texture;
 import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
+
+import java.awt.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -80,28 +86,24 @@ public class CoronaRaceApp extends GameApplication {
              textHealth.setTranslateY(140); // y = 100
              textHealth.textProperty().bind(getGameState().intProperty("health").asString());
 
-        getGameScene().addUINode(textPixels); // add to the scene graph
-        getGameScene().addUINode(textSpeed); // add to the scene graph
-        getGameScene().addUINode(textHealth); // add to the scene graph
+        //getGameScene().addUINode(textPixels); // add to the scene graph
+        //getGameScene().addUINode(textSpeed); // add to the scene graph
+        //getGameScene().addUINode(textHealth); // add to the scene graph
 
         getGameWorld().spawn("street");
         getGameWorld().spawn("sidewalk");
         getGameWorld().spawn("streetline");
         getGameWorld().spawn("player");
-        getGameWorld().spawn("bar");
+        //getGameWorld().spawn("bar");
 
-        int skeepEnemyAfter = 0, nEnemies =0;
+        Random nRandom = new Random();
         for (int i = 1; i <= Config.getMaxEnemies(); i++) {
-            Random nRandom = new Random();
-            if (nRandom.nextInt(3) != 4)
-                getGameWorld().spawn("enemy");
-            if (nRandom.nextInt(3) == 0)
-                getGameWorld().spawn("medicine");
+            if (nRandom.nextInt(3) != 4) getGameWorld().spawn("enemy");
+            if (nRandom.nextInt(3) == 0) getGameWorld().spawn("medicine");
         }
         getGameWorld().spawn("home");
 
         Input input = getInput();
-        List<Entity> entities = getGameWorld().getEntitiesByType(EntityType.PLAYER);
         getGameWorld().getEntitiesByType(EntityType.PLAYER).forEach(entity -> entity.getComponents().forEach(component -> input.scanForUserActions(component)));
     }
 
@@ -123,5 +125,7 @@ public class CoronaRaceApp extends GameApplication {
         getPhysicsWorld().addCollisionHandler(new HomeCollisionHandler());
         getPhysicsWorld().addCollisionHandler(new EnemyCollisionHandler());
         getPhysicsWorld().addCollisionHandler(new MedicineCollisionHandler());
+
+
     }
 }

@@ -33,7 +33,7 @@ public class EnemyEntityFactory implements EntityFactory {
         return Entities.builder()
                 .type(EntityType.ENEMY)
                 .viewFromTexture(imagePath+".png")
-                .bbox(new HitBox(BoundingShape.box(70, 70)))
+                .bbox(new HitBox(BoundingShape.box(50, 70)))
                 .with(new EnemyComponent(), new CollidableComponent(true))
                 .at(Config.getPositionXObject(), Config.getPositionYObject())
                 .build();
