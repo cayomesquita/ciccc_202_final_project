@@ -7,6 +7,7 @@ import com.almasb.fxgl.app.FXGL;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.asset.AssetLoader;
 import com.almasb.fxgl.entity.*;
+import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.entity.view.EntityView;
 import com.almasb.fxgl.physics.BoundingShape;
 import com.almasb.fxgl.physics.HitBox;
@@ -22,7 +23,7 @@ public class EnemyEntityFactory implements EntityFactory {
     public Entity newEnemy(SpawnData data) {
         Random nRandom = new Random();
         String imagePath = "";
-        switch (nRandom.nextInt(4)){
+        switch (nRandom.nextInt((int) Config.getnPositionsX())){
             case 0: Config.setPOSITION_X_OBJECT(Config.getXLeft());     imagePath = "enemyLeft";    break;
             case 1: Config.setPOSITION_X_OBJECT(Config.getXCenterL());  imagePath = "enemyCenterL"; break;
             case 2: Config.setPOSITION_X_OBJECT(Config.getXCenterR());  imagePath = "enemyCenterR"; break;
@@ -31,10 +32,9 @@ public class EnemyEntityFactory implements EntityFactory {
         Config.setPOSITION_Y_OBJECT(Config.getPositionYObject() - Config.getDistanceObject());
         return Entities.builder()
                 .type(EntityType.ENEMY)
-                //.viewFromNode(new Rectangle(70, 70))
                 .viewFromTexture(imagePath+".png")
-                //.bbox(new HitBox(BoundingShape.box(50, 100)))             // I dont know what it is
-                .with(new EnemyComponent())                               // ERROR
+                .bbox(new HitBox(BoundingShape.box(70, 70)))
+                .with(new EnemyComponent(), new CollidableComponent(true))
                 .at(Config.getPositionXObject(), Config.getPositionYObject())
                 .build();
     }

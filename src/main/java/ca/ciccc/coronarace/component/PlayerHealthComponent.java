@@ -58,8 +58,8 @@ public class PlayerHealthComponent extends HealthComponent {
         return maxValue;
     }
 
-    @OnUserAction(name = "test", type = ActionType.ON_ACTION_BEGIN)
-    public void test() {
+    @OnUserAction(name = "increaseBar", type = ActionType.ON_ACTION_BEGIN)
+    public void increaseBar() {
         increase(10);
     }
 }

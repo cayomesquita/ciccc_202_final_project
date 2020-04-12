@@ -12,6 +12,7 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.event.EventBus;
 import com.almasb.fxgl.input.Input;
 import com.almasb.fxgl.input.InputMapping;
+import com.almasb.fxgl.physics.CollisionHandler;
 import com.almasb.fxgl.settings.GameSettings;
 import com.almasb.fxgl.texture.Texture;
 import javafx.scene.input.KeyCode;
@@ -85,12 +86,16 @@ public class CoronaRaceApp extends GameApplication {
         getGameWorld().spawn("sidewalk");
         getGameWorld().spawn("streetline");
         getGameWorld().spawn("player");
+        getGameWorld().spawn("bar");
+
+        int skeepEnemyAfter = 0, nEnemies =0;
         for (int i = 1; i <= Config.getMaxEnemies(); i++) {
             Random nRandom = new Random();
-            getGameWorld().spawn("enemy");
-            getGameWorld().spawn("medicine");
+            if (nRandom.nextInt(3) != 4)
+                getGameWorld().spawn("enemy");
+            if (nRandom.nextInt(3) == 0)
+                getGameWorld().spawn("medicine");
         }
-        getGameWorld().spawn("bar");
         getGameWorld().spawn("home");
 
         Input input = getInput();
@@ -106,11 +111,20 @@ public class CoronaRaceApp extends GameApplication {
         input.addInputMapping(new InputMapping("down", KeyCode.DOWN));
         input.addInputMapping(new InputMapping("left", KeyCode.LEFT));
         input.addInputMapping(new InputMapping("right", KeyCode.RIGHT));
-        input.addInputMapping(new InputMapping("test", KeyCode.T));
+
+        input.addInputMapping(new InputMapping("increaseBar", KeyCode.T));
     }
     @Override
     protected void initPhysics() {
         super.initPhysics();
         getPhysicsWorld().addCollisionHandler(new HomeCollisionHandler());
+
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(EntityType.PLAYER, EntityType.MEDICINE) {
+            @Override
+            protected void onCollisionBegin(Entity player, Entity medicine) {
+                medicine.removeFromWorld();
+
+            }
+        });
     }
 }
