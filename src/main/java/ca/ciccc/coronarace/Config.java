@@ -50,7 +50,7 @@ public final class Config {
 
     // STREET VARIABLES
     public static final double  STREETLINE_DISTANCE_PERCENT = 0.75;
-    public static final double  STREET_SPEED      = 100.0;
+    public static final double  STREET_SPEED      = 400.0;
     public static       double  DISTANCE_OBJECT   = 240,
                                 POSITION_X_OBJECT = 0,
                                 POSITION_Y_OBJECT = 0;
@@ -72,7 +72,7 @@ public final class Config {
     public static double getEnemyWidth()     { return ENEMY_WIDTH; }
     public static double getMaxEnemies() {
         switch (LEVEL){
-            case 1: MAX_ENEMIES = 10; break;
+            case 1: MAX_ENEMIES = 50; break;
             case 2: MAX_ENEMIES = 20; break;
             case 3: MAX_ENEMIES = 30; break;
             case 4: MAX_ENEMIES = 40; break;
