@@ -49,7 +49,7 @@ public class PlayerComponent extends CoronaRaceComponentAbstract {
     @OnUserAction(name = "up", type = ActionType.ON_ACTION)
     public void moveUp() {
         if (entity.getY() > 0) {
-            entity.translateY(-5); // move up 5 pixels
+            entity.translateY(-1); // move up 5 pixels
             getGameState().setValue("DxDy", String.format("X:%4.2f Y:%4.2f", entity.getX(), entity.getY()));
         }
     }
@@ -57,7 +57,7 @@ public class PlayerComponent extends CoronaRaceComponentAbstract {
     @OnUserAction(name = "down", type = ActionType.ON_ACTION)
     public void moveDown() {
         if (entity.getY() < getHeight() - entity.getBoundingBoxComponent().getHeight()) {
-            entity.translateY(5); // move down 5 pixels
+            entity.translateY(1); // move down 5 pixels
             getGameState().setValue("DxDy", String.format("X:%4.2f Y:%4.2f", entity.getX(), entity.getY()));
         }
     }
@@ -65,7 +65,7 @@ public class PlayerComponent extends CoronaRaceComponentAbstract {
     @OnUserAction(name = "left", type = ActionType.ON_ACTION)
     public void moveLeft() {
         if (entity.getX() > 80) {
-            entity.translateX(-5); // move left 5 pixels
+            entity.translateX(-1); // move left 5 pixels
             getGameState().setValue("DxDy", String.format("X:%4.2f Y:%4.2f", entity.getX(), entity.getY()));
         }
     }
@@ -73,7 +73,7 @@ public class PlayerComponent extends CoronaRaceComponentAbstract {
     @OnUserAction(name = "right", type = ActionType.ON_ACTION)
     public void moveRight() {
         if (entity.getX() < getWidth() - entity.getBoundingBoxComponent().getWidth() - 130) {
-            entity.translateX(5); // move right 5 pixels
+            entity.translateX(1); // move right 5 pixels
             getGameState().setValue("DxDy", String.format("X:%4.2f Y:%4.2f", entity.getX(), entity.getY()));
         }
     }

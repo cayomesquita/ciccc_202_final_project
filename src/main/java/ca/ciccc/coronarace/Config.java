@@ -50,7 +50,7 @@ public final class Config {
 
     // STREET VARIABLES
     public static final double  STREETLINE_DISTANCE_PERCENT = 0.75;
-    public static final double  STREET_SPEED      = 200.0;
+    public static final double  STREET_SPEED      = 50.0;
     public static       double  DISTANCE_OBJECT   = 240,
                                 POSITION_X_OBJECT = 0,
                                 POSITION_Y_OBJECT = 0;
