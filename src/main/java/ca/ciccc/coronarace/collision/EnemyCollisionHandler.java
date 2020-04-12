@@ -15,10 +15,9 @@ public class EnemyCollisionHandler extends CollisionHandler {
     }
 
     @Override protected void onCollisionBegin(Entity player, Entity enemy) {
-        FXGL.getEventBus().fireEvent(new GameEvent(GameEvent.GAME_FAIL));
-        //List<Entity> PlayerHealth = FXGL.getGameWorld().getEntitiesByType(EntityType.BAR);
-        //Entity bar = PlayerHealth.iterator().next();
-        //bar.getComponent(PlayerHealthComponent.class).decrease(-10);
+        //FXGL.getEventBus().fireEvent(new GameEvent(GameEvent.GAME_FAIL));
+        PlayerHealthComponent playerHealthComponent = FXGL.getGameWorld().getEntitiesByType(EntityType.PLAYER).iterator().next().getComponent(PlayerHealthComponent.class);
+        playerHealthComponent.decrease();
     }
     @Override protected void onCollision     (Entity player, Entity enemy) {
         super.onCollision   (player, enemy);

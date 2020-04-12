@@ -103,14 +103,14 @@ public class CoronaRaceApp extends GameApplication {
             }
             getGameWorld().spawn("tree");
         }
-        //getGameWorld().spawn("streetline");
-        //getGameWorld().spawn("bar");
+        getGameWorld().spawn("streetline");
         for (int i = 1; i <= Config.getMaxEnemies(); i++) {
             if (nRandom.nextInt(3) != 4) getGameWorld().spawn("enemy");
             if (nRandom.nextInt(3) == 0) getGameWorld().spawn("medicine");
         }
         getGameWorld().spawn("home");
         getGameWorld().spawn("player");
+        getGameWorld().spawn("bar");
 
         Input input = getInput();
         getGameWorld().getEntitiesByType(EntityType.PLAYER).forEach(entity -> entity.getComponents().forEach(component -> input.scanForUserActions(component)));
@@ -124,9 +124,6 @@ public class CoronaRaceApp extends GameApplication {
         input.addInputMapping(new InputMapping("down", KeyCode.DOWN));
         input.addInputMapping(new InputMapping("left", KeyCode.LEFT));
         input.addInputMapping(new InputMapping("right", KeyCode.RIGHT));
-
-        //input.addInputMapping(new InputMapping("increaseBar", KeyCode.T));
-        //input.addInputMapping(new InputMapping("decreaseBar", KeyCode.D));
     }
     @Override
     protected void initPhysics() {

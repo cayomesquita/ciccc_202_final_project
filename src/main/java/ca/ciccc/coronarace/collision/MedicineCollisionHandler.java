@@ -6,6 +6,8 @@ import com.almasb.fxgl.app.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.physics.CollisionHandler;
 import com.almasb.fxgl.extra.entity.components.HealthComponent;
+import com.almasb.fxgl.ui.ProgressBar;
+
 import java.util.List;
 
 public class MedicineCollisionHandler extends CollisionHandler{
@@ -15,9 +17,8 @@ public class MedicineCollisionHandler extends CollisionHandler{
 
     @Override protected void onCollisionBegin(Entity player, Entity medicine) {
         medicine.removeFromWorld();
-        //List<Entity> PlayerHealth = FXGL.getGameWorld().getEntitiesByType(EntityType.BAR);
-        //Entity bar = PlayerHealth.iterator().next();
-        //bar.getComponent(PlayerHealthComponent.class).increase(10);
+        PlayerHealthComponent playerHealthComponent = FXGL.getGameWorld().getEntitiesByType(EntityType.PLAYER).iterator().next().getComponent(PlayerHealthComponent.class);
+        playerHealthComponent.increase();
     }
     @Override protected void onCollision     (Entity player, Entity medicine) { super.onCollision   (player, medicine); }
     @Override protected void onCollisionEnd  (Entity player, Entity medicine) { super.onCollisionEnd(player, medicine); }
