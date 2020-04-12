@@ -1,5 +1,6 @@
 package ca.ciccc.coronarace.component;
 
+import ca.ciccc.coronarace.Config;
 import ca.ciccc.coronarace.event.GameEvent;
 import com.almasb.fxgl.app.FXGL;
 import com.almasb.fxgl.extra.entity.components.HealthComponent;
@@ -31,7 +32,8 @@ public class PlayerHealthComponent extends HealthComponent {
         timeCount += tpf;
         if (timeCount > timeLoop) {
             timeCount = 0;
-            decrease(1);
+            Number newValue = valueProperty().getValue() - 1;
+            valueProperty().setValue(newValue.intValue() > 0 ? newValue : 0);
             FXGL.getGameState().setValue("health", valueProperty().getValue());
         }
         if (valueProperty().get() <= 0) {
@@ -44,22 +46,27 @@ public class PlayerHealthComponent extends HealthComponent {
         super.onRemoved();
     }
 
-    public void decrease(int value) {
-        Number newValue = valueProperty().getValue() - value;
+    private int getV(){
+        int value = 0;
+        switch (Config.getLevel()){
+            case 1: value = 10; break;
+            case 2: value = 15; break;
+            case 3: value = 20; break;
+            case 4: value = 25; break;
+            case 5: value = 30; break;
+        }
+        return value;
+    }
+    public void decrease() {
+        Number newValue = valueProperty().getValue() - getV();
         valueProperty().setValue(newValue.intValue() > 0 ? newValue : 0);
     }
-
-    public void increase(int value) {
-        Number newValue = valueProperty().getValue() + value;
+    public void increase() {
+        Number newValue = valueProperty().getValue() + getV();
         valueProperty().setValue(newValue.intValue() < this.maxValue ? newValue : this.maxValue);
     }
 
     public int getMaxValue() {
         return maxValue;
-    }
-
-    @OnUserAction(name = "test", type = ActionType.ON_ACTION_BEGIN)
-    public void test() {
-        increase(10);
     }
 }
