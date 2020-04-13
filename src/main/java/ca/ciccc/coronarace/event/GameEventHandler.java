@@ -17,9 +17,9 @@ public class GameEventHandler{
     @Handles(eventClass = GameEvent.class, eventType = "GAME_SUCCESS")
     public void handleGameSuccess(GameEvent event) {
         FXGL.getAudioPlayer().playSound("win.wav");
-        //FXGL.getDisplay().showMessageBox("YOU ARE SAFE!! Congratulation! :D", () -> FXGL.exit());
-        FXGL.getDisplay().showMessageBox("YOU ARE SAFE!! Congratulation! :D");
+        FXGL.getDisplay().showMessageBox("YOU ARE SAFE!! Congratulation! :D", () -> FXGL.exit());
+//        FXGL.getDisplay().showMessageBox("YOU ARE SAFE!! Congratulation! :D");
         //Level level = new Level(Config.getWIDTH()+400, Config.getHEIGHT()+400, FXGL.getGameWorld().getEntities());
-        //FXGL.getGameWorld().setLevel(level);
+//        FXGL.getGameWorld().setLevel(level);
     }
 }
