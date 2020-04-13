@@ -4,8 +4,6 @@ import ca.ciccc.coronarace.Config;
 import ca.ciccc.coronarace.event.GameEvent;
 import com.almasb.fxgl.app.FXGL;
 import com.almasb.fxgl.extra.entity.components.HealthComponent;
-import com.almasb.fxgl.input.ActionType;
-import com.almasb.fxgl.input.OnUserAction;
 
 public class PlayerHealthComponent extends HealthComponent {
 

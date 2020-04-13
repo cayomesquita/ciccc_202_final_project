@@ -19,6 +19,7 @@ public class MedicineCollisionHandler extends CollisionHandler{
         medicine.removeFromWorld();
         PlayerHealthComponent playerHealthComponent = FXGL.getGameWorld().getEntitiesByType(EntityType.PLAYER).iterator().next().getComponent(PlayerHealthComponent.class);
         playerHealthComponent.increase();
+        FXGL.getAudioPlayer().playSound("medicine.wav");
     }
     @Override protected void onCollision     (Entity player, Entity medicine) { super.onCollision   (player, medicine); }
     @Override protected void onCollisionEnd  (Entity player, Entity medicine) { super.onCollisionEnd(player, medicine); }

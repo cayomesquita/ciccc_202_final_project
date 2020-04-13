@@ -10,17 +10,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class BackGroundEntityFactory extends CoronaRaceEntityFactoryAbstract {
-
-    public static final double WIDTH_PERCENT = 0.025;
-    public static final double HEIGHT_PERCENT = 0.2;
-
     @Spawns("street")
     public Entity newStreet(SpawnData data) {
-        //Rectangle pavement = new Rectangle(Config.WIDTH, Config.HEIGHT, Color.DARKGRAY);
-        //double initialHeight = (getHeight() - 100) * 0.9;
-        //double initialWidth = (getWidth() - 50) / 3;
         return Entities.builder()
-                //.viewFromNode(pavement)
                 .viewFromTexture("road.png")
                 .renderLayer(RenderLayer.BACKGROUND)
                 .at(100, 0)
@@ -48,26 +40,22 @@ public class BackGroundEntityFactory extends CoronaRaceEntityFactoryAbstract {
 
     @Spawns("streetline")
     public Entity newStreetlines(SpawnData data) {
-        double xCenter = Config.WIDTH * (1 - WIDTH_PERCENT) / 2;
-        double height = Config.HEIGHT * HEIGHT_PERCENT;
+        double height = Config.getHEIGHT() * Config.getHEIGHT_PERCENT();
         double distance = height * Config.STREETLINE_DISTANCE_PERCENT;
-        double width = Config.WIDTH * WIDTH_PERCENT;
         Rectangle streetline = null;
         Group streetlines = new Group();
         int dy = 0;
-        while (dy < Config.HEIGHT + distance) {
-            streetline = new Rectangle(width, height, Color.LIGHTGRAY);
-            streetline.setTranslateX(xCenter);
+        while (dy < Config.getHEIGHT() + distance) {
+            streetline = new Rectangle(Config.getWIDTH() * Config.getWIDTH_PERCENT(), height, Color.LIGHTGRAY);
+            streetline.setTranslateX(Config.getWIDTH() * (1 - Config.getWIDTH_PERCENT()) / 2);
             streetline.setTranslateY(dy);
             streetlines.getChildren().add(streetline);
             dy += height + distance;
         }
         return Entities.builder()
                 .viewFromNode(streetlines)
-                //.viewFromTexture("home1.png")
                 .with(new StreetlineComponent())
                 .renderLayer(RenderLayer.BACKGROUND)
                 .build();
     }
-
 }
