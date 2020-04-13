@@ -1,4 +1,5 @@
 package ca.ciccc.coronarace.component;
+
 import ca.ciccc.coronarace.Config;
 import com.almasb.fxgl.core.math.FXGLMath;
 import com.almasb.fxgl.entity.component.Component;
@@ -17,16 +18,13 @@ public class EnemyComponent extends CoronaRaceComponentAbstract {
         animWalk = new AnimationChannel("enemy.png",3, 85, 88, Duration.seconds(1), 1, 2);
         texture = new AnimatedTexture(animIdle);
     }
-
     @Override public void onAdded()             {
         super.onAdded();
         entity.setView(texture);
     }
     @Override public void onUpdate(double tpf)  {
-        //super.onUpdate(tpf);
         double speed = Config.STREET_SPEED * tpf;
         entity.setY(entity.getY()+speed);
-        //entity.translateX(speed * tpf);
         if (speed != 0) {
             if (texture.getAnimationChannel() == animIdle) {
                 texture.loopAnimationChannel(animWalk);

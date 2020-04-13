@@ -1,5 +1,6 @@
 package ca.ciccc.coronarace.component;
 
+import com.almasb.fxgl.app.FXGL;
 import com.almasb.fxgl.core.math.FXGLMath;
 import com.almasb.fxgl.input.ActionType;
 import com.almasb.fxgl.input.OnUserAction;
@@ -18,17 +19,13 @@ public class PlayerComponent extends CoronaRaceComponentAbstract {
         animWalk = new AnimationChannel("player.png", 3, 85, 88, Duration.seconds(1), 1, 2);
         texture = new AnimatedTexture(animIdle);
     }
-
     @Override
     public void onAdded() {
         super.onAdded();
         entity.setView(texture);
     }
-
     @Override
     public void onUpdate(double tpf) {
-        //super.onUpdate(tpf);
-        //entity.translateX(speed * tpf);
         if (speed != 0) {
             if (texture.getAnimationChannel() == animIdle) {
                 texture.loopAnimationChannel(animWalk);
@@ -40,12 +37,10 @@ public class PlayerComponent extends CoronaRaceComponentAbstract {
             }
         }
     }
-
     @Override
     public void onRemoved() {
         super.onRemoved();
     }
-
     @OnUserAction(name = "up", type = ActionType.ON_ACTION)
     public void moveUp() {
         if (entity.getY() > 0) {
@@ -53,7 +48,6 @@ public class PlayerComponent extends CoronaRaceComponentAbstract {
             getGameState().setValue("DxDy", String.format("X:%4.2f Y:%4.2f", entity.getX(), entity.getY()));
         }
     }
-
     @OnUserAction(name = "down", type = ActionType.ON_ACTION)
     public void moveDown() {
         if (entity.getY() < getHeight() - entity.getBoundingBoxComponent().getHeight()) {
@@ -61,7 +55,6 @@ public class PlayerComponent extends CoronaRaceComponentAbstract {
             getGameState().setValue("DxDy", String.format("X:%4.2f Y:%4.2f", entity.getX(), entity.getY()));
         }
     }
-
     @OnUserAction(name = "left", type = ActionType.ON_ACTION)
     public void moveLeft() {
         if (entity.getX() > 80) {
@@ -69,7 +62,6 @@ public class PlayerComponent extends CoronaRaceComponentAbstract {
             getGameState().setValue("DxDy", String.format("X:%4.2f Y:%4.2f", entity.getX(), entity.getY()));
         }
     }
-
     @OnUserAction(name = "right", type = ActionType.ON_ACTION)
     public void moveRight() {
         if (entity.getX() < getWidth() - entity.getBoundingBoxComponent().getWidth() - 130) {

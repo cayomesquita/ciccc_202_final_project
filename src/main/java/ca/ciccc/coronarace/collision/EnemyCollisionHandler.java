@@ -18,6 +18,7 @@ public class EnemyCollisionHandler extends CollisionHandler {
         //FXGL.getEventBus().fireEvent(new GameEvent(GameEvent.GAME_FAIL));
         PlayerHealthComponent playerHealthComponent = FXGL.getGameWorld().getEntitiesByType(EntityType.PLAYER).iterator().next().getComponent(PlayerHealthComponent.class);
         playerHealthComponent.decrease();
+        FXGL.getAudioPlayer().playSound("enemy.wav");
     }
     @Override protected void onCollision     (Entity player, Entity enemy) {
         super.onCollision   (player, enemy);
